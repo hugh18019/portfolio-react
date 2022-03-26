@@ -21,6 +21,7 @@ const typeDefs = gql`
   type Query {
     user: User
     users: [User]
+    current_user: User
     messages: [Message]
   }
 

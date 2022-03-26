@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import "./login.styles.scss";
 import { useMutation, useQuery } from "@apollo/client";
 import { LOGIN } from "../../utils/mutations";
+
+import Auth from "../../utils/auth";
 import Messages from "../Messages";
 
 function Login() {
@@ -28,22 +30,23 @@ function Login() {
   var handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const loginRes = await login({
+      const { data } = await login({
         variables: { email: formState.email, password: formState.password },
       });
 
-      console.log("loginRes", loginRes);
+      Auth.login(data.login.token);
 
       dispatch({
         type: UPDATE_LOGGED_IN,
         loggedIn: true,
       });
-
-      window.location.replace("/Message");
     } catch (error) {
       console.log("Could not log in");
       console.log(error);
     }
+
+    setFormState({ email: "", password: "" });
+    window.location.replace("/Message");
   };
 
   useEffect(() => {

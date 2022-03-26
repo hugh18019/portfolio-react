@@ -29,6 +29,20 @@ const resolvers = {
 
       throw new AuthenticationError("Not logged in");
     },
+    current_user: async (parent, args, context) => {
+      console.log("hit current_user resolver");
+
+      console.log("context.user", context.user);
+
+      if (context.user) {
+        const userData = User.findOne({
+          email: context.user.email,
+        });
+
+        return userData;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
   },
 
   Mutation: {

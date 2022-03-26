@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useQuery } from "@apollo/client";
-import { QUERY_ALL_MESSAGES } from "../../utils/queries";
+import { QUERY_ALL_MESSAGES, QUERY_CURRENT_USER } from "../../utils/queries";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
 import "./messages.style.css";
@@ -10,11 +10,19 @@ import Form from "../../components/Form/index";
 import MessageContent from "../../components/Message-Content";
 
 export default function Messages() {
-  const myRef = useRef();
-  const [top, setTop] = useState(0);
-
   const [messages, setMessages] = useState([]);
+  const [curUser, setCurUser] = useState({});
+
   const { loading, data } = useQuery(QUERY_ALL_MESSAGES);
+  const { loading: cur_user_loading, data: cur_user_data } =
+    useQuery(QUERY_CURRENT_USER);
+
+  useEffect(() => {
+    if (cur_user_data) {
+      setCurUser(cur_user_data);
+      console.log("cur_user_data", cur_user_data);
+    }
+  }, [cur_user_data]);
 
   useEffect(() => {
     if (data) {
