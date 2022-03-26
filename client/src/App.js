@@ -3,7 +3,10 @@ import { Routes, Route } from "react-router-dom";
 
 import Navigation from "./components/Navigation";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 import Messages from "./pages/Messages";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 import "./App.css";
 
@@ -15,6 +18,7 @@ import {
 } from "@apollo/client";
 
 import { setContext } from "@apollo/client/link/context";
+import Message from "./components/Message";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:3001/graphql",
@@ -41,7 +45,10 @@ function App() {
       <Navigation />
       <Routes>
         <Route exact path="/" element={<About />} />
-        <Route path="/message" element={<Messages />} />
+        <Route path="/Contact" element={<Contact />} />
+        <Route path="/Message" element={<Messages />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Signup" element={<Signup />} />
       </Routes>
     </ApolloProvider>
   );

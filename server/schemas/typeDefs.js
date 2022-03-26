@@ -33,6 +33,8 @@ const typeDefs = gql`
 
     login(email: String!, password: String!): Auth
 
+    signup(email: String!, password: String!): Auth
+
     addMessage(sender: ID!, content: String!): Message
   }
 `;

@@ -2,7 +2,6 @@ const { AuthenticationError } = require("apollo-server-express");
 const { use } = require("bcrypt/promises");
 const { User, Message } = require("../models");
 const { signToken } = require("../utils/auth");
-const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
 const resolvers = {
   Query: {
@@ -66,7 +65,13 @@ const resolvers = {
     },
 
     login: async (parent, { email, password }) => {
-      const user = await User.findOne(email);
+      console.log("hit login resolver");
+      console.log("email", email);
+      console.log("password", password);
+
+      const user = await User.findOne({ email: email });
+
+      console.log("user", user);
 
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");
@@ -77,6 +82,29 @@ const resolvers = {
       if (!correctPw) {
         throw new AuthenticationError("Incorrect credentials");
       }
+
+      const token = signToken(user);
+
+      console.log("token", token);
+      console.log("user", user);
+
+      return { token, user };
+    },
+
+    signup: async (parent, { email, password }) => {
+      console.log("hit signup route");
+      console.log("email", email);
+
+      const user = await User.create({
+        email: email,
+        password: password,
+      });
+
+      if (!user) {
+        throw new AuthenticationError("Failed to create an user");
+      }
+
+      console.log("user", user);
 
       const token = signToken(user);
 

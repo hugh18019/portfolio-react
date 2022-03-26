@@ -43,20 +43,26 @@ class Navigation extends Component {
                 <ul>
                   <li className="nav-item">
                     <img src={cpu} alt="cpu" />
-                    <Link to="/Hobby">
-                      <a className="link">Hobbies</a>
+                    <Link to="/Hobby" className="link">
+                      Hobbies
                     </Link>
                   </li>
                   <li className="nav-item">
                     <img src={cpu} alt="cpu" />
-                    <Link to="/Work">
-                      <a className="link">Works</a>
+                    <Link to="/Work" className="link">
+                      Works
                     </Link>
                   </li>
                   <li className="nav-item">
                     <img src={cpu} alt="cpu" />
-                    <Link to="/Message">
-                      <a className="link">Message</a>
+                    <Link to="/Message" className="link">
+                      Message
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <img src={cpu} alt="cpu" />
+                    <Link to="/Contact" className="link">
+                      Contact
                     </Link>
                   </li>
                 </ul>

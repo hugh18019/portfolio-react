@@ -11,6 +11,17 @@ export const LOGIN = gql`
   }
 `;
 
+export const SIGNUP = gql`
+  mutation signup($email: String!, $password: String!) {
+    signup(email: $email, password: $password) {
+      token
+      user {
+        _id
+      }
+    }
+  }
+`;
+
 export const ADD_MESSAGE = gql`
   mutation addMessage($sender: ID!, $content: String!) {
     addOrder(sender: $sender, content: $content) {
