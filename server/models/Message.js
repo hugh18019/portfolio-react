@@ -8,6 +8,14 @@ const messageSchema = new Schema({
     ref: "User",
     required: true,
   },
+  content: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: String,
+    default: Date.now(),
+  },
 });
 
 const Message = mongoose.model("Message", messageSchema);

@@ -18,5 +18,19 @@ db.once("open", async () => {
 
   console.log("users seeded");
 
+  await Message.deleteMany();
+
+  await Message.create({
+    sender: "623d72604632844151e8977d",
+    content: "message1",
+  });
+
+  await Message.create({
+    sender: "623d72604632844151e8977f",
+    content: "message2",
+  });
+
+  console.log("messages seeded");
+
   process.exit();
 });

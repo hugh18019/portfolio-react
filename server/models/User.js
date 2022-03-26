@@ -5,19 +5,6 @@ const bcrypt = require("bcrypt");
 const Message = require("./Message");
 
 const userSchema = new Schema({
-  username: {
-    type: String,
-    unique: true,
-    trim: true,
-  },
-  firstName: {
-    type: String,
-    trim: true,
-  },
-  lastName: {
-    type: String,
-    trim: true,
-  },
   email: {
     type: String,
     required: true,

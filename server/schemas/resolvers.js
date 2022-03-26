@@ -1,24 +1,29 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { use } = require("bcrypt/promises");
-const { Category, User, Order, Product } = require("../models");
+const { User, Message } = require("../models");
 const { signToken } = require("../utils/auth");
 const stripe = require("stripe")("sk_test_4eC39HqLyjWDarjtT1zdp7dc");
 
 const resolvers = {
   Query: {
     users: async () => {
-      return await User.find().populate([{ path: "orders.products" }]);
+      return await User.find().populate("messages");
+    },
+
+    messages: async () => {
+      console.log("hit messages resolver");
+
+      return await Message.find().populate();
     },
 
     user: async (parent, args, context) => {
       if (context.user) {
         // Returns the current logged in user from the database along with their orders, products in their orders, and the categories of each of the products they ordered
         const user = await User.findById(context.user._id).populate({
-          path: "orders.products",
-          populate: "category",
+          path: "messages",
         });
 
-        user.orders.sort((a, b) => b.date - a.date);
+        user.messages.sort((a, b) => b.date - a.date);
 
         return user;
       }
@@ -76,6 +81,20 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
+    },
+
+    addMessage: async (parent, { sender, content }) => {
+      console.log("sender", sender);
+      console.log("content", content);
+
+      const message = Message.create({
+        sender: sender,
+        content: content,
+      });
+
+      console.log("message", message);
+
+      return message;
     },
   },
 };

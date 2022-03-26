@@ -1,0 +1,11 @@
+#form {
+    display: flex;
+    flex-direction: column;
+    color: black;
+}
+
+#form textarea {
+    height: 150px;
+    width: 300px;
+    display: block;
+}
