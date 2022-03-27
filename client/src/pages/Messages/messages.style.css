@@ -34,13 +34,5 @@
     flex-wrap: nowrap;
 }
 
-.message-content {
-    background-color: #eee8d7;
-    border: 2px;
-    border-style: solid;
-    border-radius: 2mm;
-    padding: 0px;
-    width: 50%;
-    height: 60%;
-}
+
 

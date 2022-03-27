@@ -1,6 +1,6 @@
 import {
   UPDATE_MESSAGES,
-  ADD_MESSAGE,
+  UPDATE_MESSAGE,
   UPDATE_CURRENT_USER,
   UPDATE_LOGGED_IN,
   UPDATE_CURRENT_MESSAGE,
@@ -21,7 +21,7 @@ const reducers = (state = initState, action) => {
         messages: action.messages,
       };
     }
-    case ADD_MESSAGE: {
+    case UPDATE_MESSAGE: {
       return {
         ...state,
         messages: [...state.messages, action.message],

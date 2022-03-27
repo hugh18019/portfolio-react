@@ -1,32 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { UPDATE_MESSAGE } from "../../utils/redux/actions/action";
 import { useMutation } from "@apollo/client";
 import { ADD_MESSAGE } from "../../utils/mutations";
 
+import { FiEdit, FiSend } from "react-icons/fi";
 import "./form.style.css";
 
-function Form(props) {
-  console.log("props", props);
+export default function Form() {
+  const dispatch = useDispatch();
 
   const [addMessage, { error }] = useMutation(ADD_MESSAGE);
 
-  const [formState, setFormState] = useState({ content: "" });
+  const [formState, setFormState] = useState({ messageContent: "" });
+
+  // const [show, setShow] = useState(false);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const res = await addMessage({
-        variables: { content: formState.content },
+      const { data } = await addMessage({
+        variables: { content: formState.messageContent },
       });
 
-      console.log("res", res);
+      const message = data.addMessage;
+
+      dispatch({
+        type: UPDATE_MESSAGE,
+        message: message,
+      });
+
+      setFormState({ messageContent: "" });
+      window.location.replace("/Message");
     } catch (error) {
       console.log("Could not send message");
       console.log(error);
     }
 
-    setFormState({ content: "" });
+    setFormState({ messageContent: "" });
   };
 
   const handleChange = async (event) => {
@@ -40,27 +52,31 @@ function Form(props) {
     console.log("formState", formState);
   };
 
+  // const toggleShow = async () => {
+  //   if (show == true) setShow(false);
+  //   else setShow(true);
+  // };
+
   return (
+    // {/* <button onClick={toggleShow}>
+    //   <FiEdit />
+    // </button> */}
     <form id="form" onSubmit={handleFormSubmit}>
+      {/* {show && (
+        <> */}
       <label htmlFor="message-content"></label>
       <textarea
-        id="content"
+        id="messageContent"
         value={formState.messageContent}
-        name="content"
-        type="content"
+        name="messageContent"
+        type="messageContent"
         onChange={handleChange}
       />
-      <button type="submit">Send</button>
+      {/* </>
+      )} */}
+      {/* <button type="submit">
+          <FiSend />
+        </button> */}
     </form>
   );
 }
-
-const mapStateToProps = (state) => {
-  return { messages: state.messages };
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  ADD_MESSAGE: (args) => dispatch(args),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Form);

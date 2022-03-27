@@ -6,6 +6,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_ALL_MESSAGES, QUERY_CURRENT_USER } from "../../utils/queries";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
+import { FiEdit, FiSend } from "react-icons/fi";
 import "./messages.style.css";
 
 import Message from "../../components/Message";
@@ -14,6 +15,8 @@ import MessageContent from "../../components/Message-Content";
 
 export default function Messages() {
   const dispatch = useDispatch();
+  const state = useSelector((state) => state.main);
+  const [show, setShow] = useState(false);
 
   const [messages, setMessages] = useState([]);
   const [curUser, setCurUser] = useState({});
@@ -26,7 +29,6 @@ export default function Messages() {
   useEffect(() => {
     if (cur_user_data) {
       setCurUser(cur_user_data);
-      console.log("cur_user_data", cur_user_data);
       setMessages(cur_user_data.current_user.messages);
 
       dispatch({
@@ -36,15 +38,19 @@ export default function Messages() {
     }
   }, [cur_user_data]);
 
-  // useEffect(() => {
-  //   if (data) {
-  //     console.log("data", data);
-  //     setMessages(data.messages);
-  //   }
-  // }, [data]);
+  const toggleShow = async () => {
+    if (show == true) setShow(false);
+    else setShow(true);
+  };
 
   return (
     <div id="messages-page">
+      <button onClick={toggleShow}>
+        <FiEdit />
+      </button>
+      <button type="submit">
+        <FiSend />
+      </button>
       <div className="messages-container">
         <Scrollbars style={{ width: "15%", height: "60%" }}>
           <div className="scrollbar-items-container">
@@ -53,9 +59,9 @@ export default function Messages() {
             })}
           </div>
         </Scrollbars>
-        <MessageContent />
+        {!show && <MessageContent />}
+        {show && <Form />}
       </div>
-      <Form />
     </div>
   );
 }
