@@ -45,20 +45,24 @@ export default function Messages() {
 
   return (
     <div id="messages-page">
-      <button onClick={toggleShow}>
-        <FiEdit />
-      </button>
-      <button type="submit">
-        <FiSend />
-      </button>
       <div className="messages-container">
-        <Scrollbars style={{ width: "15%", height: "60%" }}>
-          <div className="scrollbar-items-container">
-            {messages.map((message, index) => {
-              return <Message key={index} props={message} />;
-            })}
+        <div className="side-menu">
+          <div className="buttons">
+            <button onClick={toggleShow}>
+              <FiEdit />
+            </button>
+            <button type="submit">
+              <FiSend />
+            </button>
           </div>
-        </Scrollbars>
+          <Scrollbars>
+            <div className="scrollbar-items-container">
+              {messages.map((message, index) => {
+                return <Message key={index} props={message} />;
+              })}
+            </div>
+          </Scrollbars>
+        </div>
         {!show && <MessageContent />}
         {show && <Form />}
       </div>

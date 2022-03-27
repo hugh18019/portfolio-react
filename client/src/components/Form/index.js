@@ -4,7 +4,6 @@ import { UPDATE_MESSAGE } from "../../utils/redux/actions/action";
 import { useMutation } from "@apollo/client";
 import { ADD_MESSAGE } from "../../utils/mutations";
 
-import { FiEdit, FiSend } from "react-icons/fi";
 import "./form.style.css";
 
 export default function Form() {
@@ -13,8 +12,6 @@ export default function Form() {
   const [addMessage, { error }] = useMutation(ADD_MESSAGE);
 
   const [formState, setFormState] = useState({ messageContent: "" });
-
-  // const [show, setShow] = useState(false);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -52,18 +49,8 @@ export default function Form() {
     console.log("formState", formState);
   };
 
-  // const toggleShow = async () => {
-  //   if (show == true) setShow(false);
-  //   else setShow(true);
-  // };
-
   return (
-    // {/* <button onClick={toggleShow}>
-    //   <FiEdit />
-    // </button> */}
     <form id="form" onSubmit={handleFormSubmit}>
-      {/* {show && (
-        <> */}
       <label htmlFor="message-content"></label>
       <textarea
         id="messageContent"
@@ -72,11 +59,6 @@ export default function Form() {
         type="messageContent"
         onChange={handleChange}
       />
-      {/* </>
-      )} */}
-      {/* <button type="submit">
-          <FiSend />
-        </button> */}
     </form>
   );
 }
