@@ -53,6 +53,10 @@ export const QUERY_CURRENT_USER = gql`
     current_user {
       _id
       email
+      messages {
+        content
+        date
+      }
     }
   }
 `;

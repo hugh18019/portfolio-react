@@ -23,8 +23,8 @@ export const SIGNUP = gql`
 `;
 
 export const ADD_MESSAGE = gql`
-  mutation addMessage($sender: ID!, $content: String!) {
-    addOrder(sender: $sender, content: $content) {
+  mutation addMessage($content: String!) {
+    addMessage(content: $content) {
       content
       date
     }

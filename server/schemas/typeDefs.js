@@ -4,6 +4,7 @@ const typeDefs = gql`
   type User {
     _id: ID
     email: String
+    messages: [Message]
   }
 
   type Message {
@@ -36,7 +37,7 @@ const typeDefs = gql`
 
     signup(email: String!, password: String!): Auth
 
-    addMessage(sender: ID!, content: String!): Message
+    addMessage(content: String!): Message
   }
 `;
 

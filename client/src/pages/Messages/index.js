@@ -1,4 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { UPDATE_MESSAGES } from "../../utils/redux/actions/action";
+
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_MESSAGES, QUERY_CURRENT_USER } from "../../utils/queries";
 
@@ -10,10 +13,13 @@ import Form from "../../components/Form/index";
 import MessageContent from "../../components/Message-Content";
 
 export default function Messages() {
+  const dispatch = useDispatch();
+
   const [messages, setMessages] = useState([]);
   const [curUser, setCurUser] = useState({});
 
-  const { loading, data } = useQuery(QUERY_ALL_MESSAGES);
+  // const { loading, data } = useQuery(QUERY_ALL_MESSAGES);
+
   const { loading: cur_user_loading, data: cur_user_data } =
     useQuery(QUERY_CURRENT_USER);
 
@@ -21,15 +27,21 @@ export default function Messages() {
     if (cur_user_data) {
       setCurUser(cur_user_data);
       console.log("cur_user_data", cur_user_data);
+      setMessages(cur_user_data.current_user.messages);
+
+      dispatch({
+        type: UPDATE_MESSAGES,
+        messages: messages,
+      });
     }
   }, [cur_user_data]);
 
-  useEffect(() => {
-    if (data) {
-      console.log("data", data);
-      setMessages(data.messages);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log("data", data);
+  //     setMessages(data.messages);
+  //   }
+  // }, [data]);
 
   return (
     <div id="messages-page">

@@ -5,19 +5,19 @@ import { ADD_MESSAGE } from "../../utils/mutations";
 
 import "./form.style.css";
 
-function Form() {
+function Form(props) {
+  console.log("props", props);
+
   const [addMessage, { error }] = useMutation(ADD_MESSAGE);
 
-  const [formState, setFormState] = useState({ messageContent: "" });
+  const [formState, setFormState] = useState({ content: "" });
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
     try {
       const res = await addMessage({
-        // Should be type ObjectId. Should get sender._id from context after the user is logged_in
-        sender: "623d72604632844151e8977d",
-        content: formState.messageContent,
+        variables: { content: formState.content },
       });
 
       console.log("res", res);
@@ -26,7 +26,7 @@ function Form() {
       console.log(error);
     }
 
-    setFormState({ messageContent: "" });
+    setFormState({ content: "" });
   };
 
   const handleChange = async (event) => {
@@ -44,10 +44,10 @@ function Form() {
     <form id="form" onSubmit={handleFormSubmit}>
       <label htmlFor="message-content"></label>
       <textarea
-        id="message-content"
+        id="content"
         value={formState.messageContent}
-        name="messageContent"
-        type="messageContent"
+        name="content"
+        type="content"
         onChange={handleChange}
       />
       <button type="submit">Send</button>

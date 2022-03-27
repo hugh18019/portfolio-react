@@ -12,7 +12,7 @@ const resolvers = {
     messages: async () => {
       console.log("hit messages resolver");
 
-      return await Message.find().populate();
+      return await Message.find();
     },
 
     user: async (parent, args, context) => {
@@ -125,18 +125,31 @@ const resolvers = {
       return { token, user };
     },
 
-    addMessage: async (parent, { sender, content }) => {
-      console.log("sender", sender);
+    addMessage: async (parent, { content }, context) => {
+      console.log("hit addMessage resolver");
       console.log("content", content);
 
-      const message = Message.create({
-        sender: sender,
-        content: content,
-      });
+      if (context.user) {
+        const message = await Message.create({
+          sender: context.user._id,
+          content: content,
+        });
 
-      console.log("message", message);
+        console.log("message", message);
 
-      return message;
+        const user_id = context.user._id;
+        const user = await User.findOne({ _id: user_id });
+
+        console.log("user", user);
+
+        user.messages.push(message);
+
+        user.save();
+
+        return message;
+      }
+
+      throw new AuthenticationError("Not logged in");
     },
   },
 };
