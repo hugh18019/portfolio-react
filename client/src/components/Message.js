@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { UPDATE_CURRENT_MESSAGE } from "../utils/redux/actions/action";
+import {
+  UPDATE_CURRENT_MESSAGE,
+  SHOW_FORM,
+} from "../utils/redux/actions/action";
 
 import Button from "@material-ui/core/Button";
 
@@ -16,15 +19,20 @@ const Message = ({ props }) => {
 
   const dispatch = useDispatch();
 
-  function handleDisplayMessage() {
+  function handleClickMessage() {
     dispatch({
       type: UPDATE_CURRENT_MESSAGE,
       current_message: message,
     });
+
+    dispatch({
+      type: SHOW_FORM,
+      show_form: false,
+    });
   }
 
   return (
-    <Button onClick={handleDisplayMessage}>
+    <Button onClick={handleClickMessage}>
       {message && <>{message.content}</>}
     </Button>
   );

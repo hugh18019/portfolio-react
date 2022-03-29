@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { UPDATE_MESSAGES } from "../../utils/redux/actions/action";
+import { UPDATE_MESSAGES, SHOW_FORM } from "../../utils/redux/actions/action";
 
 import { useQuery } from "@apollo/client";
-import { QUERY_ALL_MESSAGES, QUERY_CURRENT_USER } from "../../utils/queries";
+import { QUERY_CURRENT_USER } from "../../utils/queries";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { FiEdit } from "react-icons/fi";
@@ -16,7 +16,8 @@ import MessageContent from "../../components/Message-Content";
 export default function Messages() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.main);
-  const [show, setShow] = useState(false);
+
+  const show = useSelector((state) => state.form_reducers.show_form);
 
   const [messages, setMessages] = useState([]);
   const [curUser, setCurUser] = useState({});
@@ -39,8 +40,17 @@ export default function Messages() {
   }, [cur_user_data]);
 
   const toggleShow = async () => {
-    if (show == true) setShow(false);
-    else setShow(true);
+    if (show == true) {
+      dispatch({
+        type: SHOW_FORM,
+        show_form: false,
+      });
+    } else {
+      dispatch({
+        type: SHOW_FORM,
+        show_form: true,
+      });
+    }
   };
 
   return (
