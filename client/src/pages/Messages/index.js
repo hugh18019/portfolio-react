@@ -6,7 +6,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_ALL_MESSAGES, QUERY_CURRENT_USER } from "../../utils/queries";
 
 import { Scrollbars } from "react-custom-scrollbars-2";
-import { FiEdit, FiSend } from "react-icons/fi";
+import { FiEdit } from "react-icons/fi";
 import "./messages.style.css";
 
 import Message from "../../components/Message";
@@ -50,9 +50,6 @@ export default function Messages() {
           <div className="buttons">
             <button onClick={toggleShow}>
               <FiEdit />
-            </button>
-            <button type="submit">
-              <FiSend />
             </button>
           </div>
           <Scrollbars>

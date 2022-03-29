@@ -5,6 +5,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_MESSAGE } from "../../utils/mutations";
 
 import "./form.style.css";
+import { FiSend } from "react-icons/fi";
 
 export default function Form() {
   const dispatch = useDispatch();
@@ -45,8 +46,6 @@ export default function Form() {
       ...formState,
       [name]: value,
     });
-
-    console.log("formState", formState);
   };
 
   return (
@@ -59,6 +58,9 @@ export default function Form() {
         type="messageContent"
         onChange={handleChange}
       />
+      <button type="submit">
+        <FiSend />
+      </button>
     </form>
   );
 }
