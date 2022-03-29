@@ -78,10 +78,9 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    login: async (parent, { email, password }) => {
+    login: async (parent, { email }) => {
       console.log("hit login resolver");
       console.log("email", email);
-      console.log("password", password);
 
       const user = await User.findOne({ email: email });
 
@@ -91,11 +90,11 @@ const resolvers = {
         throw new AuthenticationError("Incorrect credentials");
       }
 
-      const correctPw = await user.isCorrectPassword(password);
+      // const correctPw = await user.isCorrectPassword(password);
 
-      if (!correctPw) {
-        throw new AuthenticationError("Incorrect credentials");
-      }
+      // if (!correctPw) {
+      //   throw new AuthenticationError("Incorrect credentials");
+      // }
 
       const token = signToken(user);
 
@@ -105,13 +104,12 @@ const resolvers = {
       return { token, user };
     },
 
-    signup: async (parent, { email, password }) => {
+    signup: async (parent, { email }) => {
       console.log("hit signup route");
       console.log("email", email);
 
       const user = await User.create({
         email: email,
-        password: password,
       });
 
       if (!user) {

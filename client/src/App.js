@@ -8,6 +8,10 @@ import Messages from "./pages/Messages";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
+import Login_auth0 from "./pages/Login/login_auth0";
+import Logout_auth0 from "./pages/Logout/logout_auth0";
+import Profile from "./pages/Profile/profile";
+
 import "./App.css";
 
 import {
@@ -18,7 +22,6 @@ import {
 } from "@apollo/client";
 
 import { setContext } from "@apollo/client/link/context";
-import Message from "./components/Message";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:3001/graphql",
@@ -47,9 +50,11 @@ function App() {
         <Route exact path="/" element={<About />} />
         <Route path="/Contact" element={<Contact />} />
         <Route path="/Message" element={<Messages />} />
-        <Route path="/Login" element={<Login />} />
+        <Route path="/Login" element={<Login_auth0 />} />
+        <Route path="/logout" element={<Logout_auth0 />} />
         <Route path="/Signup" element={<Signup />} />
       </Routes>
+      <Profile />
     </ApolloProvider>
   );
 }

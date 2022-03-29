@@ -43,6 +43,18 @@ class Navigation extends Component {
                 <ul>
                   <li className="nav-item">
                     <img src={cpu} alt="cpu" />
+                    <Link to="/Login" className="link">
+                      Login
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <img src={cpu} alt="cpu" />
+                    <Link to="/Logout" className="link">
+                      Logout
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <img src={cpu} alt="cpu" />
                     <Link to="/Hobby" className="link">
                       Hobbies
                     </Link>

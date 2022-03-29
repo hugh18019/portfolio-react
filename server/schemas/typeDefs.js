@@ -27,15 +27,15 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(email: String!, password: String!): Auth
+    addUser(email: String!): Auth
 
     addUserTester(email: String!, password: String!): User
 
     updateUser(email: String, password: String!): User
 
-    login(email: String!, password: String!): Auth
+    login(email: String!): Auth
 
-    signup(email: String!, password: String!): Auth
+    signup(email: String!): Auth
 
     addMessage(content: String!): Message
   }

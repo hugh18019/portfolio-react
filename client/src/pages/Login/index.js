@@ -4,10 +4,9 @@ import { UPDATE_LOGGED_IN } from "../../utils/redux/actions/action";
 import { Link } from "react-router-dom";
 import "./login.styles.scss";
 import { useMutation, useQuery } from "@apollo/client";
-import { LOGIN } from "../../utils/mutations";
 
+import { LOGIN } from "../../utils/mutations";
 import Auth from "../../utils/auth";
-import Messages from "../Messages";
 
 function Login() {
   console.log("Inside login page");
