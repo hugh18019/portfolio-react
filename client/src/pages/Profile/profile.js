@@ -32,8 +32,6 @@ export default function Profile(context) {
       });
 
       const token = data.signup.token;
-      console.log("token", token);
-
       auth.login(token);
     } catch (error) {
       console.log("User already in the database");

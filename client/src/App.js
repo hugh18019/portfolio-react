@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Navigation from "./components/Navigation";
 import About from "./pages/About";
+import Works from "./pages/Works";
 import Contact from "./pages/Contact";
 import Messages from "./pages/Messages";
 import Login from "./pages/Login";
@@ -49,6 +50,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<About />} />
         <Route path="/Contact" element={<Contact />} />
+        <Route path="/Work" element={<Works />} />
         <Route path="/Message" element={<Messages />} />
         <Route path="/Login" element={<Login_auth0 />} />
         <Route path="/logout" element={<Logout_auth0 />} />
