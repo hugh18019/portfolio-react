@@ -29,6 +29,8 @@ export default function Messages() {
 
   useEffect(() => {
     if (cur_user_data) {
+      console.log("cur_user_data", cur_user_data);
+
       setCurUser(cur_user_data);
       setMessages(cur_user_data.current_user.messages);
 
