@@ -12,18 +12,9 @@ import { AiOutlineCoffee } from "react-icons/ai";
 import { AiOutlineMessage } from "react-icons/ai";
 import clock from "../../assets/images/clock.svg";
 
+import Timer from "../Timer";
+
 function Navigation() {
-  // const [time, setTime] = useState();
-  // let timer = 0;
-
-  // useEffect(() => {
-  //   timer = setInterval(() => {
-  //     setTime(moment().format("h:mm:ss a"));
-  //   }, 100);
-
-  //   return () => clearTimeout(timer);
-  // }, []);
-
   const logged_in = useSelector((state) => state.main.loggedIn);
 
   return (
@@ -32,7 +23,7 @@ function Navigation() {
         <nav className="nav">
           <div className="name-tag">
             {" "}
-            <img src={clock} alt="clock" />
+            <img src={clock} alt="clock" /> <Timer />
           </div>
           <div className="nav-content-container">
             <div id="navbar-content">
