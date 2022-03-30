@@ -4,6 +4,11 @@ import moment from "moment";
 
 import "./navigation.style.css";
 
+import { AiOutlineHome } from "react-icons/ai";
+import { AiOutlineLogin } from "react-icons/ai";
+import { AiOutlineLogout } from "react-icons/ai";
+import { AiOutlineCoffee } from "react-icons/ai";
+import { AiOutlineMessage } from "react-icons/ai";
 import cpu from "../../assets/images/cpu2.svg";
 import clock from "../../assets/images/clock.svg";
 
@@ -42,33 +47,28 @@ class Navigation extends Component {
               <div id="navbar-content">
                 <ul>
                   <li className="nav-item">
-                    <img src={cpu} alt="cpu" />
                     <Link to="/Login" className="link">
-                      Login
+                      <AiOutlineLogin /> Signin
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <img src={cpu} alt="cpu" />
                     <Link to="/Logout" className="link">
-                      Logout
+                      <AiOutlineLogout /> Signout
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <img src={cpu} alt="cpu" />
-                    <Link to="/Hobby" className="link">
-                      Hobbies
+                    <Link to="/" className="link">
+                      <AiOutlineHome /> Home
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <img src={cpu} alt="cpu" />
                     <Link to="/Work" className="link">
-                      Works
+                      <AiOutlineCoffee /> Works
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <img src={cpu} alt="cpu" />
                     <Link to="/Contact" className="link">
-                      Contact
+                      <AiOutlineMessage /> Contact
                     </Link>
                   </li>
                 </ul>

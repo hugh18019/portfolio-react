@@ -1,8 +1,9 @@
 import React from "react";
+import "./footer.style.css";
 
-import send from "../assets/images/send.svg";
-import linkedin from "../assets/images/linkedin.svg";
-import github from "../assets/images/github.svg";
+import send from "../../assets/images/send.svg";
+import linkedin from "../../assets/images/linkedin.svg";
+import github from "../../assets/images/github.svg";
 
 export default function Footer() {
   return (

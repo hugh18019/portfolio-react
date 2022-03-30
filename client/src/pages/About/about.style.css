@@ -1,0 +1,22 @@
+/* For the about page */
+
+#container-about-page {
+    background-color:#eee8d7;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .intro-container {
+    color: black;
+    width: 80%;
+    margin-bottom: 5%;
+  }
+  
+  #section-title-about-page {
+    margin-bottom: 5%;
+    width: 80%;
+  }

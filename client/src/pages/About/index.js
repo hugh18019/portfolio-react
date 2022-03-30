@@ -1,6 +1,7 @@
 import React from "react";
+import "./about.style.css";
 
-import activity_yellow from "../assets/images/activity_yellow.svg";
+import activity_yellow from "../../assets/images/activity_yellow.svg";
 
 export default function About() {
   console.log("got here");

@@ -1,0 +1,26 @@
+/* Creates a padding of 30px around the text in the footer,
+sets font-family of the text, and centers the text.
+Also clears any floating elements on both sides of the text. */
+footer {
+    height: 20%;
+    clear: both;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+      'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Sets the size of the h4 header in the footer tags to be 20px. */
+  footer h4 {
+    font-size: 20px;
+    padding: 10px;
+  }
+  
+  /* Centers the text of the two links in the Contact Me footer */
+  
+  footer a {
+    padding: 2%;
+  }

@@ -6,12 +6,12 @@ import About from "./pages/About";
 import Works from "./pages/Works";
 import Contact from "./pages/Contact";
 import Messages from "./pages/Messages";
-import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 import Login_auth0 from "./pages/Login/login_auth0";
 import Logout_auth0 from "./pages/Logout/logout_auth0";
 import Profile from "./pages/Profile/profile";
+import Footer from "./components/Footer";
 
 import "./App.css";
 
@@ -57,6 +57,7 @@ function App() {
         <Route path="/Signup" element={<Signup />} />
       </Routes>
       <Profile />
+      <Footer />
     </ApolloProvider>
   );
 }
