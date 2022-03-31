@@ -29,6 +29,9 @@ export default function Profile() {
         variables: { email: user.email },
       });
 
+      const token = signup_data.signup.token;
+      Auth.login(token);
+
       if (!login_data) {
         const { data: signup_data } = await signup({
           variables: { email: user.email },
