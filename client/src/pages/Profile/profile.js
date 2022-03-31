@@ -29,10 +29,10 @@ export default function Profile() {
         variables: { email: user.email },
       });
 
-      const token = login_data.login.token;
-      Auth.login(token);
-
-      if (!login_data) {
+      if (login_data) {
+        const token = login_data.login.token;
+        Auth.login(token);
+      } else {
         const { data: signup_data } = await signup({
           variables: { email: user.email },
         });
