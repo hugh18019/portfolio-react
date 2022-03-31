@@ -84,7 +84,7 @@ const resolvers = {
       const user = await User.findOne({ email: email });
 
       if (!user) {
-        throw new AuthenticationError("Incorrect credentials");
+        return null;
       }
 
       const token = signToken(user);
@@ -98,6 +98,8 @@ const resolvers = {
       const user = await User.create({
         email: email,
       });
+
+      console.log("user in signup resolver", user);
 
       if (!user) {
         throw new AuthenticationError("Failed to create an user");

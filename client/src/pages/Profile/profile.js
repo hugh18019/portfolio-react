@@ -25,22 +25,23 @@ export default function Profile() {
     console.log("logging the user in");
 
     if (!loggedIn) {
-      try {
-        const { data } = await login({
+      const { data: login_data } = await login({
+        variables: { email: user.email },
+      });
+
+      if (!login_data) {
+        const { data: signup_data } = await signup({
           variables: { email: user.email },
         });
 
-        const token = data.login.token;
+        const token = signup_data.signup.token;
         Auth.login(token);
-
-        dispatch({
-          type: UPDATE_LOGGED_IN,
-          loggedIn: true,
-        });
-      } catch (error) {
-        console.log("Could not login");
-        console.log(error);
       }
+
+      dispatch({
+        type: UPDATE_LOGGED_IN,
+        loggedIn: true,
+      });
     }
   };
 
