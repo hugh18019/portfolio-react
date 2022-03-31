@@ -30,7 +30,6 @@ export default function Form() {
       });
 
       setFormState({ messageContent: "" });
-      window.location.replace("/Message");
     } catch (error) {
       console.log("Could not send message");
       console.log(error);

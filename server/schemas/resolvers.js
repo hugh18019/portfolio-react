@@ -78,35 +78,22 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    login: async (parent, { email }) => {
+    login: async (parent, req, { email }, context) => {
       console.log("hit login resolver");
-      console.log("email", email);
 
-      const user = await User.findOne({ email: email });
-
-      console.log("user", user);
+      const user = await User.findOne(email);
 
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");
       }
 
-      // const correctPw = await user.isCorrectPassword(password);
-
-      // if (!correctPw) {
-      //   throw new AuthenticationError("Incorrect credentials");
-      // }
-
       const token = signToken(user);
-
-      console.log("token", token);
-      console.log("user", user);
 
       return { token, user };
     },
 
     signup: async (parent, { email }) => {
       console.log("hit signup route");
-      console.log("email", email);
 
       const user = await User.create({
         email: email,
@@ -116,8 +103,6 @@ const resolvers = {
         throw new AuthenticationError("Failed to create an user");
       }
 
-      console.log("user", user);
-
       const token = signToken(user);
 
       return { token, user };
@@ -126,6 +111,7 @@ const resolvers = {
     addMessage: async (parent, { content }, context) => {
       console.log("hit addMessage resolver");
       console.log("content", content);
+      console.log("context.user", context.user);
 
       if (context.user) {
         const message = await Message.create({
@@ -133,12 +119,8 @@ const resolvers = {
           content: content,
         });
 
-        console.log("message", message);
-
         const user_id = context.user._id;
         const user = await User.findOne({ _id: user_id });
-
-        console.log("user", user);
 
         user.messages.push(message);
 

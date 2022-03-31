@@ -19,7 +19,8 @@ export default function Messages() {
 
   const show = useSelector((state) => state.form_reducers.show_form);
 
-  const [messages, setMessages] = useState([]);
+  let messages = useSelector((state) => state.message_reducers.messages);
+
   const [curUser, setCurUser] = useState({});
 
   // const { loading, data } = useQuery(QUERY_ALL_MESSAGES);
@@ -32,12 +33,14 @@ export default function Messages() {
       console.log("cur_user_data", cur_user_data);
 
       setCurUser(cur_user_data);
-      setMessages(cur_user_data.current_user.messages);
 
-      dispatch({
-        type: UPDATE_MESSAGES,
-        messages: messages,
-      });
+      if (messages.length == 0) {
+        messages = cur_user_data.current_user.messages;
+        dispatch({
+          type: UPDATE_MESSAGES,
+          messages: messages,
+        });
+      }
     }
   }, [cur_user_data]);
 

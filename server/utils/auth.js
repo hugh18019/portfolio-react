@@ -1,3 +1,4 @@
+require("dotenv").config();
 const jwt = require("jsonwebtoken");
 
 const secret = process.env.SECRET;
@@ -9,7 +10,7 @@ module.exports = {
 
     // console.log("req.body.token", req.body.token);
     // console.log("req.query.token", req.query.token);
-    // console.log("req.headers.authorizatioin", req.headers.authorization);
+    console.log("req.headers.authorizatioin", req.headers.authorization);
 
     if (req.headers.authorization) {
       token = token.split(" ").pop().trim();
@@ -24,7 +25,11 @@ module.exports = {
       const { data } = jwt.verify(token, secret, {
         maxAge: expiration,
       });
+
       req.user = data;
+
+      console.log("data", data);
+      console.log("req.user in server auth", req.user);
     } catch {
       console.log("Invalid token");
     }

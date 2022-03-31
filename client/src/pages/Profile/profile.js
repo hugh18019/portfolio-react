@@ -1,17 +1,18 @@
 import React, { useEffect, useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { UPDATE_LOGGED_IN } from "../../utils/redux/actions/action";
 import { useMutation } from "@apollo/client";
 import Auth from "../../utils/auth";
-import { SIGNUP } from "../../utils/mutations";
+import { SIGNUP, LOGIN } from "../../utils/mutations";
 import auth from "../../utils/auth";
 
 export default function Profile(context) {
   const { user } = useAuth0();
-
+  const loggedIn = useSelector((state) => state.main.loggedIn);
   const dispatch = useDispatch();
-  const [signup, { error }] = useMutation(SIGNUP);
+  const [signup, { error: signup_error }] = useMutation(SIGNUP);
+  const [login, { error: login_error }] = useMutation(LOGIN);
 
   useEffect(() => {
     if (user) {
@@ -21,21 +22,25 @@ export default function Profile(context) {
   }, [user]);
 
   var login_user = async () => {
-    dispatch({
-      type: UPDATE_LOGGED_IN,
-      loggedIn: true,
-    });
+    console.log("logging the user in");
 
-    try {
-      const { data } = await signup({
-        variables: { email: user.email },
-      });
+    if (!loggedIn) {
+      try {
+        const { data } = await login({
+          variables: { email: user.email },
+        });
 
-      const token = data.signup.token;
-      auth.login(token);
-    } catch (error) {
-      console.log("User already in the database");
-      console.log(error);
+        const token = data.login.token;
+        auth.login(token);
+
+        dispatch({
+          type: UPDATE_LOGGED_IN,
+          loggedIn: true,
+        });
+      } catch (error) {
+        console.log("Could not login");
+        console.log(error);
+      }
     }
   };
 
