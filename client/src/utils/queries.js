@@ -34,15 +34,13 @@ export const QUERY_ALL_USERS = gql`
 `;
 
 export const QUERY_USER = gql`
-  {
-    user {
-      firstName
-      lastName
-      orders {
-        _id
-        products {
-          _id
-        }
+  query user($email: String!) {
+    user(email: $email) {
+      _id
+      email
+      messages {
+        content
+        date
       }
     }
   }

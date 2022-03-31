@@ -15,7 +15,7 @@ const resolvers = {
       return await Message.find();
     },
 
-    user: async (parent, args, context) => {
+    user: async (parent, { email }, context) => {
       if (context.user) {
         // Returns the current logged in user from the database along with their orders, products in their orders, and the categories of each of the products they ordered
         const user = await User.findById(context.user._id).populate({
@@ -78,10 +78,10 @@ const resolvers = {
       throw new AuthenticationError("Not logged in");
     },
 
-    login: async (parent, req, { email }, context) => {
+    login: async (parent, { email }, context) => {
       console.log("hit login resolver");
 
-      const user = await User.findOne(email);
+      const user = await User.findOne({ email: email });
 
       if (!user) {
         throw new AuthenticationError("Incorrect credentials");

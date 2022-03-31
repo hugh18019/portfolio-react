@@ -7,7 +7,7 @@ import Auth from "../../utils/auth";
 import { SIGNUP, LOGIN } from "../../utils/mutations";
 import auth from "../../utils/auth";
 
-export default function Profile(context) {
+export default function Profile() {
   const { user } = useAuth0();
   const loggedIn = useSelector((state) => state.main.loggedIn);
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ export default function Profile(context) {
         });
 
         const token = data.login.token;
-        auth.login(token);
+        Auth.login(token);
 
         dispatch({
           type: UPDATE_LOGGED_IN,

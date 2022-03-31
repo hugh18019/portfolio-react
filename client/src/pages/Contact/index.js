@@ -2,18 +2,19 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Messages from "../Messages";
 import Login_auth0 from "../Login/login_auth0";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Contact() {
   const loggedIn = useSelector((state) => state.main.loggedIn);
 
   console.log("loggedIn", loggedIn);
 
-  // if (!loggedIn) window.location.replace("/Login");
+  const { user, isAuthenticated } = useAuth0();
 
   return (
     <>
-      {loggedIn && <Messages />}
-      {!loggedIn && <Login_auth0 />}
+      {isAuthenticated && <Messages user={user} />}
+      {!isAuthenticated && <Login_auth0 />}
     </>
   );
 }

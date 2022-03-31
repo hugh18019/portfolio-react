@@ -1,9 +1,10 @@
 import {
   UPDATE_MESSAGES,
   UPDATE_MESSAGE,
+  UPDATE_CURRENT_MESSAGE,
   UPDATE_CURRENT_USER,
   UPDATE_LOGGED_IN,
-  UPDATE_CURRENT_MESSAGE,
+  CLEAR_STATE,
 } from "../actions/action.js";
 
 var initState = {
@@ -19,6 +20,12 @@ const reducers = (state = initState, action) => {
       return {
         ...state,
         messages: action.messages,
+      };
+    }
+    case UPDATE_CURRENT_MESSAGE: {
+      return {
+        ...state,
+        current_message: action.message,
       };
     }
     case UPDATE_MESSAGE: {
@@ -39,11 +46,8 @@ const reducers = (state = initState, action) => {
         loggedIn: action.loggedIn,
       };
     }
-    case UPDATE_CURRENT_MESSAGE: {
-      return {
-        ...state,
-        current_message: action.current_message,
-      };
+    case CLEAR_STATE: {
+      return initState;
     }
     default: {
       return state;

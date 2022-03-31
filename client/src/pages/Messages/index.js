@@ -13,13 +13,15 @@ import Message from "../../components/Message";
 import Form from "../../components/Form/index";
 import MessageContent from "../../components/Message-Content";
 
-export default function Messages() {
+export default function Messages({ user }) {
+  console.log("user in messages page", user);
+
   const dispatch = useDispatch();
   const state = useSelector((state) => state.main);
 
   const show = useSelector((state) => state.form_reducers.show_form);
 
-  let messages = useSelector((state) => state.message_reducers.messages);
+  let messages = useSelector((state) => state.main.messages);
 
   const [curUser, setCurUser] = useState({});
 

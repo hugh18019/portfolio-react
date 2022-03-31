@@ -5,7 +5,7 @@ import form_reducers from "./form_reducers";
 
 const rootReducer = combineReducers({
   main: reducers,
-  message_reducers: message_reducers,
+  // message_reducers: message_reducers,
   form_reducers: form_reducers,
 });
 
