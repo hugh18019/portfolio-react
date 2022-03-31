@@ -29,7 +29,7 @@ export default function Profile() {
         variables: { email: user.email },
       });
 
-      const token = signup_data.signup.token;
+      const token = login_data.login.token;
       Auth.login(token);
 
       if (!login_data) {
