@@ -10,6 +10,8 @@ import Button from "@material-ui/core/Button";
 const Message = ({ props }) => {
   const [message, setMessage] = useState({});
 
+  console.log("message", message);
+
   useEffect(() => {
     if (props) {
       setMessage(props);

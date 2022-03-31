@@ -25,7 +25,7 @@ const reducers = (state = initState, action) => {
     case UPDATE_CURRENT_MESSAGE: {
       return {
         ...state,
-        current_message: action.message,
+        current_message: action.current_message,
       };
     }
     case UPDATE_MESSAGE: {

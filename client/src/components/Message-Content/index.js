@@ -7,6 +7,9 @@ export default function MessageContent() {
 
   const current_message = state.main.current_message;
 
+  console.log("state in MessageContent", state);
+  console.log("current_message", current_message);
+
   return (
     <>
       <div className="message-content">
