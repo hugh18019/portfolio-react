@@ -81,11 +81,11 @@ const resolvers = {
     login: async (parent, { email }, context) => {
       console.log("hit login resolver");
 
+      console.log("email", email);
+
       const user = await User.findOne({ email: email });
 
-      if (!user) {
-        return null;
-      }
+      console.log("user", user);
 
       const token = signToken(user);
 
@@ -121,17 +121,14 @@ const resolvers = {
           content: content,
         });
 
-        const user_id = context.user._id;
-        const user = await User.findOne({ _id: user_id });
+        const user_data = await User.findOne({ _id: context.user._id });
 
-        user.messages.push(message);
+        user_data.messages.push(message);
 
-        user.save();
+        user_data.save();
 
         return message;
       }
-
-      throw new AuthenticationError("Not logged in");
     },
   },
 };

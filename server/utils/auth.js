@@ -12,7 +12,7 @@ module.exports = {
     // console.log("req.query.token", req.query.token);
     console.log("req.headers.authorizatioin", req.headers.authorization);
 
-    if (req.headers.authorization) {
+    if (token) {
       token = token.split(" ").pop().trim();
       console.log("token", token);
     }

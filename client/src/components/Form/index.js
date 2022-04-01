@@ -3,11 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { UPDATE_MESSAGE } from "../../utils/redux/actions/action";
 import { useMutation } from "@apollo/client";
 import { ADD_MESSAGE } from "../../utils/mutations";
+import { useAuth0 } from "@auth0/auth0-react";
 
 import "./form.style.css";
 import { FiSend } from "react-icons/fi";
 
 export default function Form() {
+  const { user, isAuthenticated } = useAuth0();
+
   const dispatch = useDispatch();
 
   const [addMessage, { error }] = useMutation(ADD_MESSAGE);
