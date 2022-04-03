@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import { useSelector, useDispatch } from 'react-redux';
-import { UPDATE_LOGGED_IN } from '../utils/redux/actions/action';
-import { useQuery, useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
-import { SIGNUP, LOGIN } from '../utils/mutations';
-import createAuth0Client from '@auth0/auth0-spa-js';
-import { AiOutlineConsoleSql } from 'react-icons/ai';
+import React, { useState, useEffect, useContext } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useSelector, useDispatch } from "react-redux";
+import { UPDATE_LOGGED_IN } from "../utils/redux/actions/action";
+import { useQuery, useMutation } from "@apollo/client";
+import Auth from "../utils/auth";
+import { SIGNUP, LOGIN } from "../utils/mutations";
+import createAuth0Client from "@auth0/auth0-spa-js";
+import { AiOutlineConsoleSql } from "react-icons/ai";
 
 export default function Landing() {
   const [login, { error }] = useMutation(LOGIN);
@@ -14,14 +14,13 @@ export default function Landing() {
   const {
     user,
     isAuthenticated,
+    isLoading,
     logout,
     getAccessTokenSilently,
     getIdTokenClaims,
   } = useAuth0();
 
-  console.log('user', user);
-  console.log('isAuthenticated', isAuthenticated);
-
+  const [email, setEmail] = useState();
   const [token, setToken] = useState();
   const dispatch = useDispatch();
 
@@ -33,7 +32,7 @@ export default function Landing() {
       try {
         accessToken = await getAccessTokenSilently({
           audience: process.env.REACT_APP_AUTH0_AUDIENCE,
-          scope: 'read:current_user',
+          scope: "read:current_user",
         });
       } catch (e) {
         console.log(e.message);
@@ -42,8 +41,10 @@ export default function Landing() {
       try {
         const claims = await getIdTokenClaims();
         idToken = claims.__raw;
-        // console.log('idToken', idToken);
+        console.log("claims", claims);
+        // console.log("idToken", idToken);
         setToken(idToken);
+        setEmail(claims.email);
       } catch (e) {
         console.log(e.message);
       }
@@ -52,7 +53,7 @@ export default function Landing() {
     const loginUser = async () => {
       try {
         const { data } = await login({
-          variables: { email: user.email },
+          variables: { email: email },
         });
 
         Auth.login(data.login.token);
@@ -63,13 +64,23 @@ export default function Landing() {
         });
       } catch (error) {
         console.log(error);
-        console.log('Could not log in');
+        console.log("Could not log in");
       }
     };
 
     // getTokens();
     // if (token) loginUser();
-    loginUser();
+
+    if (!isLoading) console.log("isAuthenticatd", isAuthenticated);
+
+    if (isAuthenticated) {
+      getTokens();
+
+      if (email) {
+        console.log("email", email);
+        loginUser();
+      }
+    }
   }, [
     getAccessTokenSilently,
     getIdTokenClaims,
@@ -78,6 +89,7 @@ export default function Landing() {
     isAuthenticated,
     login,
     token,
+    email,
   ]);
 
   return <></>;

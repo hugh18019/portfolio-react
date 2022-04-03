@@ -8,7 +8,11 @@ const Auth0ProviderWithHistory = ({ children }) => {
   const history = useNavigate();
   const audience = process.env.REACT_APP_AUTH0_AUDIENCE;
   const onRedirectCallback = (appState) => {
-    history.push(appState?.returnTo || window.location.pathname);
+    history.push(
+      appState && appState.targetUrl
+        ? appState.targetUrl
+        : (window.location.href = "http://localhost:3000/Landing")
+    );
   };
 
   return (

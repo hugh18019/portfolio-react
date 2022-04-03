@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 // redux
 import { Provider } from "react-redux";
@@ -14,12 +14,12 @@ import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
 const store = createStore(reducer);
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Router>
     <Auth0ProviderWithHistory>
       <Provider store={store}>
         <App />
       </Provider>
     </Auth0ProviderWithHistory>
-  </BrowserRouter>,
+  </Router>,
   document.getElementById("root")
 );
