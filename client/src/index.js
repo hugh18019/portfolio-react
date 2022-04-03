@@ -14,7 +14,7 @@ import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
 const store = createStore(reducer);
 
 ReactDOM.render(
-  <Router>
+  <Router basename="/">
     <Auth0ProviderWithHistory>
       <Provider store={store}>
         <App />
