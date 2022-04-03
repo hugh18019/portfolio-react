@@ -1,6 +1,7 @@
 {
     "name": "portfolio",
     "version": "1.0.0",
+    "homepage": "https://whispering-chamber-76792.herokuapp.com",
     "engines": {
         "node": "16.x"
     },
