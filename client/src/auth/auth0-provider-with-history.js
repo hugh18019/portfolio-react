@@ -11,7 +11,9 @@ const Auth0ProviderWithHistory = ({ children }) => {
     history.push(
       appState && appState.targetUrl
         ? appState.targetUrl
-        : (window.location.href = "http://localhost:3000/Landing")
+        : // : (window.location.href = "http://localhost:3000/Landing")    // for development
+          (window.location.href =
+            "https://whispering-chamber-76792.herokuapp.com/Landing") // for deployment
     );
   };
 
