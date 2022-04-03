@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./works.style.css";
+import "./work.style.css";
 
 import github_cyan from "../../assets/images/github-cyan.svg";
 import codesandbox from "../../assets/images/codesandbox.svg";
