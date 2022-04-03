@@ -17,7 +17,7 @@ var jwtCheck = jwt({
   algorithms: ["RS256"],
 });
 
-app.use(jwtCheck);
+// app.use(jwtCheck);
 
 app.get("/authorized", function (req, res) {
   res.send("Secured Resource");
