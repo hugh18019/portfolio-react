@@ -7,14 +7,13 @@ const Auth0ProviderWithHistory = ({ children }) => {
   const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
   const history = useNavigate();
   const audience = process.env.REACT_APP_AUTH0_AUDIENCE; // for development
-  // const audience = "https://whispering-chamber-76792.herokuapp.com/"; // for deployment
   const onRedirectCallback = (appState) => {
     history.push(
       appState && appState.targetUrl
         ? appState.targetUrl
         : // : (window.location.href = "http://localhost:3000/Landing")    // for development
           (window.location.href =
-            "https://whispering-chamber-76792.herokuapp.com") // for deployment
+            "https://whispering-chamber-76792.herokuapp.com/Landing") // for deployment
     );
   };
 
