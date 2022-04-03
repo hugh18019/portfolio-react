@@ -29,8 +29,8 @@ server.start().then((res) => {
     app.use(express.static(path.join(__dirname, "../client/build")));
   }
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/public/index.html"));
+  app.get("*", (request, response) => {
+    response.sendFile(path.join(__dirname, "client/build", "index.html"));
   });
 
   db.once("open", () => {
