@@ -28,16 +28,20 @@ function Navigation() {
           <div className="nav-content-container">
             <div id="navbar-content">
               <ul>
-                <li className="nav-item">
-                  <Link to="/Login" className="link">
-                    <AiOutlineLogin /> Signin
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/Logout" className="link">
-                    <AiOutlineLogout /> Signout
-                  </Link>
-                </li>
+                {!logged_in && (
+                  <li className="nav-item">
+                    <Link to="/Login" className="link">
+                      <AiOutlineLogin /> Signin
+                    </Link>
+                  </li>
+                )}
+                {logged_in && (
+                  <li className="nav-item">
+                    <Link to="/Logout" className="link">
+                      <AiOutlineLogout /> Signout
+                    </Link>
+                  </li>
+                )}
                 <li className="nav-item">
                   <Link to="/" className="link">
                     <AiOutlineHome /> Home
