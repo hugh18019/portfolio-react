@@ -13,6 +13,11 @@ export default function Login_auth0() {
 
   async function login() {
     try {
+      dispatch({
+        type: UPDATE_LOGGED_IN,
+        loggedIn: true,
+      });
+
       loginWithRedirect();
     } catch (error) {
       console.log("Could not log in");

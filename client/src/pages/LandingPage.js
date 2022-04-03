@@ -5,20 +5,17 @@ import { UPDATE_LOGGED_IN } from "../utils/redux/actions/action";
 import { useQuery, useMutation } from "@apollo/client";
 import Auth from "../utils/auth";
 import { SIGNUP, LOGIN } from "../utils/mutations";
-import createAuth0Client from "@auth0/auth0-spa-js";
-import { AiOutlineConsoleSql } from "react-icons/ai";
+import Messages from "./Messages";
+import Loading from "../components/Loading";
 
 export default function Landing() {
-  const [login, { error }] = useMutation(LOGIN);
+  const loggedIn = useSelector((state) => state.main.loggedIn);
 
-  const {
-    user,
-    isAuthenticated,
-    isLoading,
-    logout,
-    getAccessTokenSilently,
-    getIdTokenClaims,
-  } = useAuth0();
+  const [login, { error }] = useMutation(LOGIN);
+  const [loading, setLoading] = useState(true);
+
+  const { user, isAuthenticated, getAccessTokenSilently, getIdTokenClaims } =
+    useAuth0();
 
   const [email, setEmail] = useState();
   const [token, setToken] = useState();
@@ -62,16 +59,13 @@ export default function Landing() {
           type: UPDATE_LOGGED_IN,
           loggedIn: true,
         });
+
+        setLoading(false);
       } catch (error) {
         console.log(error);
         console.log("Could not log in");
       }
     };
-
-    // getTokens();
-    // if (token) loginUser();
-
-    if (!isLoading) console.log("isAuthenticatd", isAuthenticated);
 
     if (isAuthenticated) {
       getTokens();
@@ -90,7 +84,13 @@ export default function Landing() {
     login,
     token,
     email,
+    loading,
   ]);
 
-  return <></>;
+  return (
+    <div>
+      {loggedIn && token && <Messages />}
+      {!loggedIn && !token && <Loading />}
+    </div>
+  );
 }
