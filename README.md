@@ -29,7 +29,7 @@ This is my portfolio site that contains the links to the some of the full stack 
 
 ## Authors
 
-- Huiran Lin
+- hugh18019
 - GitHub Profile: https://github.com/hugh18019/portfolio-react
 
 ## License
