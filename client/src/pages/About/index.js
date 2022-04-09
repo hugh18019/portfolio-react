@@ -9,7 +9,7 @@ export default function About() {
   const education = `I graduated from the Full-Stack Coding Bootcamp from UC Berkeley in summer 2021.
                                 I'm currently pursuing a Bachelor's Degree in Computer Science from Sonoma State University,
                                 and on course to graduate by Winter 2022.`;
-  const experience = `Experience: I have 3+ years working with C++, and 1+ year developing in Javascript.`;
+  const experience = `Experience: I have 3+ years working with C++, and 2+ year developing in Javascript.`;
 
   return (
     <div id="container-about-page">
