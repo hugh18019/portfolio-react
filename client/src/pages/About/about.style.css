@@ -1,7 +1,7 @@
 /* For the about page */
 
 #container-about-page {
-    background-color:#eee8d7;
+    background-color:#395266;
     height: 100%;
     width: 100%;
     display: flex;
@@ -11,8 +11,8 @@
   }
   
   .intro-container {
-    color: black;
-    width: 80%;
+    color: whitesmoke;
+    width: 68%;
     margin-bottom: 5%;
   }
   

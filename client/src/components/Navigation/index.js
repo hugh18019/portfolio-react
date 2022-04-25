@@ -15,15 +15,14 @@ import Timer from "../Timer";
 function Navigation() {
   const logged_in = useSelector((state) => state.main.loggedIn);
 
-  console.log("logged_in in Navigation", logged_in);
-
   return (
     <div className="layout">
       <header>
         <nav className="nav">
           <div className="name-tag">
             {" "}
-            <img src={clock} alt="clock" /> <Timer />
+            <img src={clock} alt="clock" style={{ paddingRight: "5px" }} />
+            <Timer />
           </div>
           <div className="nav-content-container">
             <div id="navbar-content">
