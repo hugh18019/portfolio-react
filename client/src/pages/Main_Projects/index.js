@@ -1,14 +1,12 @@
 import * as React from "react";
 import { Button } from "@material-ui/core";
-import "./works.style.css";
+import "./main_projects.style.css";
 
 import PokemonBattler from "../../assets/images/Pokemon-Battler.png";
 import DrinkLibrary from "../../assets/images/Drink-Library.png";
 import WeatherDashboard from "../../assets/images/Weather-Dashboard.jpg";
 import Tidy from "../../assets/images/tidy-resized.png";
 import terminal_green from "../../assets/images/terminal_green.svg";
-import Linux from "../../assets/images/gabriel-heinzer-unsplash.jpg";
-import Sudoku from "../../assets/images/richard-bell-unsplash.jpg";
 
 import Work from "../../components/Work";
 
@@ -21,18 +19,17 @@ const Works = [
       "A web game that mimics the battle mechanics of the classic Pokemon games on Nintendo.",
   },
   {
-    name: "Bash Shell (University Project)",
-    img: Linux,
-    deployed: "",
+    name: "Drink Library",
+    img: DrinkLibrary,
+    deployed: "https://hugh18019.github.io/Drinks-Library/",
     description:
-      "A custom linux shell built with C that mimics the behavior of the Bash shell.",
+      "A web app that recommends drink recipes based on an event you want to celebrate.",
   },
   {
-    name: "Sudoku Checker (University Project)",
-    img: Sudoku,
-    deployed: "",
-    description:
-      "A C program that uses threads and processes to parallely validate a sudoku game board",
+    name: "Weather Dashboard",
+    img: WeatherDashboard,
+    deployed: "https://hugh18019.github.io/Weather-Dashboard/",
+    description: "A weather forecast app.",
   },
   {
     name: "Tidy",
@@ -44,7 +41,17 @@ const Works = [
 ];
 
 export default function Projects() {
+  const [hl, setHl] = React.useState("");
+
   let mounted = false;
+
+  function changeHlColorOnMouseEnter() {
+    setHl("#edcd1f");
+  }
+
+  function changeHlColorOnMouseUp() {
+    setHl("white");
+  }
 
   React.useEffect(() => {
     mounted = true;

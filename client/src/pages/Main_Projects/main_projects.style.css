@@ -1,0 +1,76 @@
+/* For the works page */
+
+#container-works-page {
+    background-color: #395266;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+  
+  #section-title-works-page {
+    color: white;
+    /* margin-left: 20%; */
+    margin-bottom: 5%;
+    width: 68%;
+    display: flex;
+    align-items: center;
+  }
+  
+  
+  #sidebar {
+    margin-right: 70%;
+    margin-left: 20%;
+    width: 80%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #sidebar li {
+    list-style: none;
+  }
+  
+  #sidebar-menu {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  /* Contains a vertical bar and a sidebar item */
+  .sidebar-item-container {
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+    align-items: center;
+  }
+  
+  .hl {
+    /* border-left: 2px solid grey; */
+    border-top-width: 2px; 
+    border-top-style: solid;
+    border-top-color: white;
+    width: 100%;
+  }
+  
+  
+  .sidebar-item:hover {
+    background-color: black;
+    opacity: 0.6;
+  }
+  
+  .projects-container {
+    margin: auto;
+    max-width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
