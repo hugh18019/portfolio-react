@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 import Navigation from "./components/Navigation";
 import About from "./pages/About";
@@ -23,28 +24,37 @@ import {
 
 import { setContext } from "@apollo/client/link/context";
 
-const httpLink = createHttpLink({
-  // uri: "http://localhost:3001/graphql", // for development
-  // uri: "http://whispering-chamber-76792.herokuapp.com/graphql", // for deployment
-  uri: process.env.REACT_APP_GRAPHQL_URI,
-});
+var httpLink;
+var authLink;
+var client;
 
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("id_token");
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : "",
-    },
-  };
-});
+function setup(cookies) {
+  httpLink = createHttpLink({
+    // uri: "http://localhost:3001/graphql", // for development
+    // uri: "http://whispering-chamber-76792.herokuapp.com/graphql", // for deployment
+    uri: process.env.REACT_APP_GRAPHQL_URI,
+  });
 
-const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-});
+  authLink = setContext((_, { headers }) => {
+    const token = cookies.id_token;
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : "",
+      },
+    };
+  });
+
+  client = new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+  });
+}
 
 function App() {
+  const [cookies, setCookie] = useCookies();
+  setup(cookies);
+
   return (
     <ApolloProvider client={client}>
       <Navigation />

@@ -1,9 +1,9 @@
 import decode from "jwt-decode";
 
 class AuthService {
-  getProfile() {
-    return decode(this.getToken());
-  }
+  // getProfile() {
+  //   return decode(this.getToken());
+  // }
 
   loggedIn() {
     // Checks if there is a saved token and it's still valid
@@ -22,21 +22,21 @@ class AuthService {
     }
   }
 
-  getToken() {
-    // Retrieves the user token from localStorage
-    return localStorage.getItem("id_token");
-  }
+  // getToken() {
+  //   // Retrieves the user token from localStorage
+  //   return localStorage.getItem("id_token");
+  // }
 
-  login(idToken) {
-    // Saves user token to localStorage
-    localStorage.setItem("id_token", idToken);
-  }
+  // login(idToken) {
+  //   // Saves user token to localStorage
+  //   localStorage.setItem("id_token", idToken);
+  // }
 
-  logout() {
-    // Clear user token and profile data from localStorage
-    localStorage.removeItem("id_token");
-    // this will reload the page and reset the state of the application
-  }
+  // logout() {
+  //   // Clear user token and profile data from localStorage
+  //   localStorage.removeItem("id_token");
+  //   // this will reload the page and reset the state of the application
+  // }
 }
 
 export default new AuthService();

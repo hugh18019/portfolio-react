@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useCookies } from "react-cookie";
+import Auth from "../utils/auth";
+
 import { useSelector, useDispatch } from "react-redux";
 import { UPDATE_LOGGED_IN } from "../utils/redux/actions/action";
-import { useQuery, useMutation } from "@apollo/client";
-import Auth from "../utils/auth";
-import { SIGNUP, LOGIN } from "../utils/mutations";
+
+import { useMutation } from "@apollo/client";
+import { LOGIN } from "../utils/mutations";
+
 import Messages from "./Messages";
 import Loading from "../components/Loading";
 
@@ -20,6 +24,8 @@ export default function Landing() {
   const [email, setEmail] = useState();
   const [token, setToken] = useState();
   const dispatch = useDispatch();
+
+  const [cookies, setCookie] = useCookies(["id_token"]);
 
   useEffect(() => {
     let accessToken;
@@ -39,7 +45,7 @@ export default function Landing() {
         const claims = await getIdTokenClaims();
         idToken = claims.__raw;
         console.log("claims", claims);
-        // console.log("idToken", idToken);
+
         setToken(idToken);
         setEmail(claims.email);
       } catch (e) {
@@ -53,12 +59,14 @@ export default function Landing() {
           variables: { email: email },
         });
 
-        Auth.login(data.login.token);
+        // Auth.login(data.login.token);
 
         dispatch({
           type: UPDATE_LOGGED_IN,
           loggedIn: true,
         });
+
+        setCookie("id_token", data.login.token, { path: "/" });
 
         setLoading(false);
       } catch (error) {

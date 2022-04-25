@@ -8,18 +8,11 @@ module.exports = {
   authMiddleware: function ({ req, next }) {
     let token = req.body.token || req.query.token || req.headers.authorization;
 
-    console.log("req.user", req.user);
-
-    // console.log('req.body.token', req.body.token);
-    // console.log('req.query.token', req.query.token);
-    // console.log('req.headers.authorizatioin', req.headers.authorization);
+    console.log("req.headers.authorization", req.headers.authorization);
 
     if (token) {
       token = token.split(" ").pop().trim();
-      console.log("token", token);
     }
-
-    console.log("token", token);
 
     if (!token) {
       return req;
@@ -31,9 +24,6 @@ module.exports = {
       });
 
       req.user = data;
-
-      console.log("data", data);
-      console.log("req.user in server auth", req.user);
     } catch {
       console.log("Invalid token");
     }
@@ -44,6 +34,8 @@ module.exports = {
   signToken: function ({ email, _id }) {
     const payload = { email, _id };
 
-    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+    return jwt.sign({ data: payload }, secret, {
+      expiresIn: expiration,
+    });
   },
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-
+import { CookiesProvider } from "react-cookie";
 // redux
 import { Provider } from "react-redux";
 import { createStore } from "redux";
@@ -16,9 +16,11 @@ const store = createStore(reducer);
 ReactDOM.render(
   <Router basename="/">
     <Auth0ProviderWithHistory>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <CookiesProvider>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </CookiesProvider>
     </Auth0ProviderWithHistory>
   </Router>,
   document.getElementById("root")
